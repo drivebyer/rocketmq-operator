@@ -209,7 +209,7 @@ func newDeploymentForCR(cr *rocketmqv1alpha1.Console) *appsv1.Deployment {
 						Image:           cr.Spec.ConsoleDeployment.Spec.Template.Spec.Containers[0].Image,
 						Name:            cr.Spec.ConsoleDeployment.Spec.Template.Spec.Containers[0].Name,
 						ImagePullPolicy: cr.Spec.ConsoleDeployment.Spec.Template.Spec.Containers[0].ImagePullPolicy,
-						Env:             append(cr.Spec.ConsoleDeployment.Spec.Template.Spec.Containers[0].Env, env),
+						Env:             append([]corev1.EnvVar{env}, cr.Spec.ConsoleDeployment.Spec.Template.Spec.Containers[0].Env...),
 						Ports:           cr.Spec.ConsoleDeployment.Spec.Template.Spec.Containers[0].Ports,
 						VolumeMounts:    cr.Spec.ConsoleDeployment.Spec.Template.Spec.Containers[0].VolumeMounts,
 					}},
